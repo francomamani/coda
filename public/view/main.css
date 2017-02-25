@@ -1,0 +1,17 @@
+.activo, .inactivo{
+	display: block;
+	width: 15px;
+	height: 15px;
+	border-radius: 100%;
+	margin: 0 auto;
+}
+.activo{
+	background-color: #89E67A;
+	border: 2px double white;
+	box-shadow: 0 0 5px #2D914A;
+}
+.inactivo{
+	background-color: #A50831;
+	border: 2px double white;
+	box-shadow: 0 0 5px #921818;
+}

@@ -1,0 +1,63 @@
+<div ng-include="'view/partials/menu.html'"></div>
+<div class="container">
+	<div class="row">
+		<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+			<form ng-submit="accion(opcion)" role="form">
+				<legend>Menu</legend>
+
+				<div class="form-group">
+					<label for="">Fraternidad</label>
+					<select class="form-control" ng-model="opcion.id" required>
+						<option value="{{conjunto.$id}}" ng-repeat="conjunto in conjuntos">
+							{{ conjunto.nombre }}
+						</option>
+					</select>
+				</div>
+			
+				<div class="form-group">
+					<label for="">Seleccionar</label>
+					<select class="form-control" ng-model="opcion.item" required>
+						<option value="0">Adicionar</option>
+						<option value="1">Ingresar</option>
+						<option value="2">Terminar</option>
+						<option value="4">Reset</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<button class="btn btn-primary">Seleccionar</button>
+				</div>
+			</form>	
+<!-- 			</button class="btn btn-danger" ng-click="guardar()">Guardar</button>	 -->
+		</div>
+		<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+			<input type="text" class="form-control" ng-model="busqueda">
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Nombre</th>
+							<th>Hora de Inicio</th>
+							<th>Hora Actual</th>
+							<th>Hora de Fin</th>
+							<th>Posicion</th>
+							<th>Distancia</th>
+							<th>Estado</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="conjunto in conjuntos | filter: busqueda">
+							<td>{{conjunto.nombre}}</td>
+							<td>{{conjunto.horaInicio  }}</td>
+							<td>{{conjunto.horaActual }}</td>
+							<td>{{conjunto.horaFinal }}</td>
+							<td>{{conjunto.nombreUbicacion }}</td>
+							<td>{{conjunto.distancia }}</td>
+							<td>{{conjunto.estado }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	
+</div>

@@ -1,0 +1,148 @@
+<div ng-include="'view/partials/menu.html'"></div>
+<div class="container">
+	<div class="row" ng-show="vista == 'categorias'">
+		<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+			<form ng-submit="guardar(categoria)" role="form">
+				<legend>Registrar Categoria</legend>
+			
+				<div class="form-group">
+					<label>Nombre</label>
+					<input type="text" class="form-control" ng-model="categoria.nombre" required autofocus>
+				</div>
+				<div class="form-group">
+					<label>Tipo</label>
+					<input type="text" class="form-control" ng-model="categoria.tipo" required>
+				</div>
+			
+				<button type="submit" class="btn btn-primary">Guardar</button>
+			</form>
+		</div>
+		<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+			<input type="text" class="form-control" ng-model="buscar_categoria">
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>N.</th>
+							<th>Nombre</th>
+							<th>Tipo</th>
+							<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="categoria in categorias | filter: buscar_categoria">
+							<td>{{ $index + 1 }}</td>
+							<td>{{ categoria.nombre }}</td>
+							<td>{{ categoria.tipo }}</td>
+							<td>
+								<button class="btn btn-danger btn-sm" ng-click="confirmar(categoria)">
+									<span class="fa fa-trash"></span>
+								</button>
+								<button class="btn btn-primary btn-sm" ng-click="mostrarLugar(categoria)">
+									<span class="fa fa-plus"></span>
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="row" ng-show="vista == 'lugares'">
+		<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+			<form ng-submit="guardarLugar(lugar)" role="form">
+				<legend>
+					<div class="row">
+						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+							Registrar Lugar
+						</div>
+						<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-right">
+							<button class="btn btn-sm btn-default" ng-click="vista = 'categorias'">
+								<span class="fa fa-chevron-left"></span>
+							</button>
+						</div>
+					</div>
+				</legend>
+			
+				<div class="form-group">
+					<label>Nombre</label>
+					<input type="text" class="form-control" ng-model="lugar.nombre" required autofocus>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+							<label>Latitud</label>
+							<input type="text" class="form-control" ng-model="lugar.latitud" required>							
+						</div>
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+							<label>Longitud</label>
+							<input type="text" class="form-control" ng-model="lugar.longitud" required>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label>Descripcion</label>
+					<textarea class="form-control" ng-model="lugar.descripcion" required></textarea>
+				</div>
+				<div class="form-group">
+					<label>Telefono</label>
+					<input type="text" class="form-control" ng-model="lugar.telefono" required>
+				</div>
+				<div class="form-group">
+					<label>Observaciones</label>
+					<textarea ng-model="lugar.observaciones"  class="form-control" required></textarea>
+				</div>				
+			
+				<button type="submit" class="btn btn-primary">Guardar</button>
+			</form>
+		</div>
+		<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+			<input type="text" class="form-control" ng-model="buscar_lugar">
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>N.</th>
+							<th>Nombre</th>
+							<th>Telefono</th>
+							<th>Descripcion</th>
+							<th>Latitud</th>
+							<th>Longitud</th>
+							<th>Obs.</th>
+							<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="lugar in lugares | filter: buscar_lugar" ng-if="lugar.categoriaId == categoriaId">
+							<td>{{ $index+1 }}</td>
+							<td>{{ lugar.nombre }}</td>
+							<td>{{ lugar.telefono }}</td>
+							<td>{{ lugar.descripcion }}</td>
+							<td>{{ lugar.latitud }}</td>
+							<td>{{ lugar.longitud }}</td>
+							<td>{{ lugar.observaciones }}</td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="confirmacion">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Confirmación</h4>
+			</div>
+			<div class="modal-body">
+				¿Esta seguro de eliminar este item?
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+				<button type="button" class="btn btn-primary" ng-click="eliminar()">Eliminar</button>
+			</div>
+		</div>
+	</div>
+</div>

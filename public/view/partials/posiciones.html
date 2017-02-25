@@ -1,0 +1,55 @@
+<div ng-include="'view/partials/menu.html'"></div>
+<div class="container">
+	<div class="row">
+		<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+			<form ng-submit="asignacion(posicion)" role="form">
+				<legend>Asignacion de Eventos a Fraternidad</legend>
+			
+				<div class="form-group">
+					<label for="">Fraternidad</label>
+					<select ng-model="posicion.fraternidad_id" class="form-control" required autofocus>
+						<option value="{{fraternidad.$id}}" ng-repeat="fraternidad in fraternidades">{{fraternidad.nombre}}</option>
+					</select>
+				</div>
+<!-- 				<div class="form-group">
+	<label for="">Evento</label>
+	<select ng-model="posicion.evento_id" class="form-control" required>
+		<option value="{{evento.$id}}" ng-repeat="evento in eventos">{{evento.nombre}}</option>
+	</select>
+</div> -->
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+							<label for="">Posicion Sabado</label>
+							<input type="number" ng-model="posicion.numero_sabado"  class="form-control" required>
+							
+						</div>
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+							<label for="">posicion Domingo</label>
+							<input type="number" ng-model="posicion.numero_domingo"  class="form-control" required>
+							
+						</div>
+					</div>
+				</div>
+				<button type="submit" class="btn btn-primary">Asignar</button>
+			</form>	
+		</div>	
+		<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+			{{ fraternidades | json }}
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>			
+		</div>
+	</div>
+</div>

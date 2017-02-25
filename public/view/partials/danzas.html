@@ -1,0 +1,107 @@
+<div ng-include="'view/partials/menu.html'"></div>
+<div class="container">
+	<div class="row" ng-if="vista == 'danzas'">
+		<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+			<form ng-submit="guardar(danza)" role="form">
+				<legend>Danza</legend>
+			
+				<div class="form-group">
+					<label>Nombre</label>
+					<input type="text" class="form-control" ng-model="danza.nombre" placeholder="Nombre" required autofocus>
+				</div>
+				<div class="form-group">
+					<label>Descripcion</label>				
+					<textarea ng-model="danza.descripcion" cols="30" class="form-control" required></textarea>
+				</div>
+
+				<button type="submit" class="btn btn-primary">Guardar</button>
+			</form>
+		</div>
+		<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+			<input type="text" ng-model="buscarDanza">
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>N.</th>
+							<th>Nombre</th>
+							<th>Descripcion</th>
+							<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="danza in danzas | filter: buscarDanza">
+							<td>{{ $index + 1 }}</td>
+							<td>{{ danza.nombre }}</td>
+							<td>{{ danza.descripcion }}</td>
+							<td>
+								<button class="btn btn-danger btn-sm" ng-click="confirmar(danza)"><span class="fa fa-trash"></span></button>	
+								<button class="btn btn-success btn-sm" ng-click="mostrarFraternidad(danza)">+</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="row" ng-if="vista == 'fraternidades'">
+		<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+			<form ng-submit="guardarFraternidad(fraternidad)" role="form">
+				<legend>
+					<div class="row">
+						<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+							Fraternidad 
+						</div>
+						<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-right">
+							<button class="btn btn-default btn-sm" ng-click="mostrarDanzas()"><span class="fa fa-chevron-left"></span></button>
+						</div>
+					</div>
+
+				</legend>
+			
+				<div class="form-group">
+					<label>Nombre</label>
+					<input type="text" id="nombreFraternidad" class="form-control" ng-model="fraternidad.nombre" required autofocus>
+				</div>
+			
+				<button type="submit" class="btn btn-primary">Registrar</button>
+			</form>
+		</div>
+		<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+			<input type="text" ng-model="buscar">
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>DanzaId</th>
+							<th>Nombre</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="fraternidad in fraternidades | filter: buscar" ng-if="fraternidad.danzaId == danzaId">
+							<td>{{ fraternidad.danzaId }}</td>
+							<td>{{ fraternidad.nombre }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="confirmacion">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Confirmación</h4>
+			</div>
+			<div class="modal-body">
+				¿Esta seguro de eliminar este item?
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+				<button type="button" class="btn btn-primary" ng-click="eliminar()">Eliminar</button>
+			</div>
+		</div>
+	</div>
+</div>
